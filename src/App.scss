@@ -1,0 +1,43 @@
+.navbar{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+
+  .container{
+    max-width: 75% !important;
+  }
+
+  .menu-title{
+    color: #099;
+    font-weight: 500;
+    margin-right: 20px;
+  }
+
+  .navbar-item.is-active{
+    color: #00f;
+  }
+}
+
+.connectButton, .connectButton:hover, .connectButton:focus{
+  font-weight: 700;
+  font-size: 18px;
+  color: #777;
+}
+
+.connectButton.green, .connectButton:hover.green, .connectButton:focus.green{
+  color: #0b0;
+  border: 1px solid #0b0;
+}
+
+.hr{
+  border-top: 1px solid #ccc;
+}
+
+.red{
+  color: #f00;
+}
+.green{
+  color: #0b0;
+}
+.blue{
+  color: #00f;
+}
