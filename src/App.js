@@ -1,6 +1,6 @@
 
 import './App.scss';
-import ConnectionProvider from './data/ConnectionProvider.jsx';
+import ConnectionProvider from './components/helpers/ConnectionProvider.js';
 import Header from './components/common/Header.jsx';
 import Home from './components/pages/Home.jsx';
 import FactoryMonitor from './components/pages/Factory.jsx';

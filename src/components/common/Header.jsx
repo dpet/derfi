@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink } from "react-router-dom";
-import { useConnection, useConnect } from '../../data/ConnectionProvider.jsx';
+import { useConnection, useConnect } from '../helpers/ConnectionProvider.js';
 
 function Header() {
 	const connection = useConnection()

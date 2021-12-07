@@ -54,7 +54,7 @@ export default function FactorySelector(){
 			</div>
 
 			<div className="control">
-				<input className="input is-primary" type="text" placeholder="factory address" value={factoryAddress} onChange={e => userChangeFactoryAddress(e)} />
+				<input className="input is-primary address-input" type="text" placeholder="factory address" value={factoryAddress} onChange={e => userChangeFactoryAddress(e)} />
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 
 import React, { useContext, useState, useEffect } from 'react';
+import useInterval from './UseInterval.js';
 import { ethers } from 'ethers';
 
 const ConnectionContext = React.createContext()
@@ -21,19 +22,8 @@ export default function ConnectionProvider({children}){
 	    networkId: null
 	  });
 
-	  useEffect(()=>{
-	    const interval = setInterval(()=>{
-	      checkNetwork()
-	    }, 2000)
+	  useInterval(() => checkNetwork(), 1000)
 
-	    return ()=>{clearInterval(interval)}
-	  }, []);
-
-	  useEffect(()=>{
-	    checkNetwork()
-	  }, [connection.provider])
-
-	  // triggered when header button clicked
 	  async function ethersConnect(){
 	    const provider = new ethers.providers.Web3Provider(window.ethereum)
 	    const network = await provider.getNetwork()
@@ -53,11 +43,13 @@ export default function ConnectionProvider({children}){
 	      try {
 	        const network = await connection.provider.getNetwork()
 
-	        setConnection(prevState => ({
-	          ...prevState,
-	          networkName: network.name,
-	          networkId: network.chainId
-	        }))
+	        if (connection.networkName !== network.name || connection.networkId !== network.chainId){
+		        setConnection(prevState => ({
+		          ...prevState,
+		          networkName: network.name,
+		          networkId: network.chainId
+		        }))
+		    }
 	      }
 	      catch(e){
 	        ethersConnect()
