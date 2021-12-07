@@ -1,7 +1,9 @@
 import { networks } from '../../data/amm.js';
 import { useState, useEffect } from 'react';
+import { useConnection } from '../helpers/ConnectionProvider.js';
 
-export default function FactorySelector({selected, setSelected}){
+export default function FactorySelector({selected, setSelected, children}){
+	const connection = useConnection()
 
 	// set initial selections
 	useEffect(() => {
@@ -14,21 +16,42 @@ export default function FactorySelector({selected, setSelected}){
 
 	// select first amm when a network is changed
 	useEffect(() => {
-		if (selected.network)
+		if (selected.network){
 			setSelected(prevState => ({
 				...prevState,
 				amm: networks[selected.network].amms[0].name
 			}))
+		}
+
+		checkNetworkMatch()
 	}, [selected.network])
+
+	// see if the networ matches after metamask network changes
+	useEffect(() => {
+		checkNetworkMatch()
+	}, [connection])
 
 	// add factory address when amm is changed
 	useEffect(() => {
-		if (selected.network && selected.amm)
+		if (selected.network && selected.amm){
 			setSelected(prevState => ({
 				...prevState,
 				factoryAddress: networks[selected.network].amms.find(ammItem => ammItem.name === selected.amm).factory
 			}))
+		}
 	}, [selected.amm])
+
+	function checkNetworkMatch(){
+		let networkMatch
+		if (selected.network)
+			networkMatch = networks[selected.network].networkId === connection.networkId
+		else networkMatch = false
+
+		setSelected(prevState => ({
+			...prevState,
+			networkMatch: networkMatch
+		}))
+	}
 
 	function userChangeNetwork(val){
 		if (!val){
@@ -70,9 +93,9 @@ export default function FactorySelector({selected, setSelected}){
 		}))
 	}
 
-	return <div>
+	return <div className="mb-6">
 		<span>Select a factory or enter a factory address</span>
-		<div className="field is-grouped mb-6">
+		<div className="field is-grouped mb-0">
 			<div className="select is-success mr-2">
 				<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
 					<option value=''>Network</option>
@@ -90,6 +113,10 @@ export default function FactorySelector({selected, setSelected}){
 			<div className="control">
 				<input className="input is-primary address-input" type="text" placeholder="factory address" value={selected.factoryAddress} onChange={e => userChangeFactoryAddress(e)} />
 			</div>
+
+			{children}
 		</div>
+		{!connection.connected && <span className="blue">Metamask not connected</span>}
+		{(connection.connected && selected.network) && (selected.networkMatch ? <span className="green">Network match</span> : <span className="red">Network mismatch</span>)}
 	</div>
 }

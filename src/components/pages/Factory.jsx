@@ -9,7 +9,8 @@ export default function FactoryMonitor(){
 	let [ selected, setSelected ] = useState({
 		network: '',
 		amm: '',
-		factoryAddress: ''
+		factoryAddress: '',
+		networkMatch: null
 	})
 
  	return (
@@ -19,7 +20,10 @@ export default function FactoryMonitor(){
  			<FactorySelector 
  				selected={selected} 
  				setSelected={setSelected}>
+ 					<button className="button is-primary">Load</button>
  			</FactorySelector>
+
+
 
  			<div>
  				<span className="label is-size-4 mb-4">Registered Pools:</span>
