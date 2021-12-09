@@ -57,7 +57,8 @@ export default function FactorySelector({selected, setSelected, children}){
 		if (!val){
 			setSelected(prevState => ({
 				...prevState,
-				factoryAddress: ''
+				factoryAddress: '',
+				amm: ''
 			}))
 		}
 
@@ -84,11 +85,8 @@ export default function FactorySelector({selected, setSelected, children}){
 	function userChangeFactoryAddress(e){
 		setSelected(prevState => ({
 			...prevState,
-			network: ''
-		}))
-
-		setSelected(prevState => ({
-			...prevState,
+			network: '',
+			amm: '',
 			factoryAddress: e.target.value
 		}))
 	}
@@ -116,7 +114,10 @@ export default function FactorySelector({selected, setSelected, children}){
 
 			{children}
 		</div>
-		{!connection.connected && <span className="blue">Metamask not connected</span>}
-		{(connection.connected && selected.network) && (selected.networkMatch ? <span className="green">Network match</span> : <span className="red">Network mismatch</span>)}
+
+		<div>
+			{!connection.connected && <span className="blue">Metamask not connected</span>}
+			{(connection.connected && selected.network) && (selected.networkMatch ? <span className="green">Network match</span> : <span className="red">Network mismatch</span>)}
+		</div>
 	</div>
 }
