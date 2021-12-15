@@ -22,7 +22,7 @@ function Header() {
 	}, [])
 
 	return (
-		<nav className="navbar is-transparent">
+		<nav className="navbar is-dark">
 			<div className="container">
 			  <div className="navbar-brand">
 			  	<NavLink className="navbar-item" exact to="/">
@@ -41,8 +41,7 @@ function Header() {
 
 			        <div className="navbar-dropdown">
 			          <NavLink activeClassName="is-active" className="navbar-item" to="/factory">Factory Monitor</NavLink>
-			          <NavLink activeClassName="is-active" className="navbar-item" to="/router">Router Monitor</NavLink>
-			          <NavLink activeClassName="is-active" className="navbar-item" to="/liquidity_pools">Liquidity Pool Tools</NavLink>
+			          <NavLink activeClassName="is-active" className="navbar-item" to="/liquidity_pools">Liquidity Pool Monitor</NavLink>
 			        </div>
 			      </div>
 			      
@@ -51,7 +50,7 @@ function Header() {
 
 			    <div className="navbar-end">
 			      <div className="navbar-item">
-			        <button onClick={ethersConnect} className={'button connectButton ' + (connection.connected ? 'green' : '')}>{connection.connected ? `${connection.networkName.toUpperCase()} ${connection.networkId}` : 'Connect Metamask'}</button>
+			        <button onClick={ethersConnect} className={'button connectButton ' + (connection.connected ? 'is-success' : '')}>{connection.connected ? `${connection.networkName.toUpperCase()} ${connection.networkId}` : 'Connect Metamask'}</button>
 			      </div>
 			    </div>
 			  </div>

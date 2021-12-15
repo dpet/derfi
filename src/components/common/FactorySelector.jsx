@@ -91,7 +91,7 @@ export default function FactorySelector({selected, setSelected, children}){
 		}))
 	}
 
-	return <div className="mb-6">
+	return <div className="mb-4">
 		<span>Select a factory or enter a factory address</span>
 		<div className="field is-grouped mb-0">
 			<div className="select is-success mr-2">
