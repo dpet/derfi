@@ -7,11 +7,7 @@
     max-width: 75% !important;
   }
 
-  .menu-title{
-    color: #099;
-    font-weight: 500;
-    margin-right: 20px;
-  }
+
 
   .navbar-item.is-active{
     color: #00f;
@@ -30,6 +26,19 @@
     color: #ccc !important;
     background: #202020 !important;
   }
+}
+
+.custom-menu{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000;
+  background: #202020 !important;
+}
+
+.menu-title, .menu-title:hover{
+  background: #202020 !important;
+  color: #099 !important;
+  font-weight: 500;
+  margin-right: 20px;
 }
 
 .connectButton, .connectButton:hover, .connectButton:focus{

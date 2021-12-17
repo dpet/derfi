@@ -26,6 +26,10 @@ export default function FactoryMonitor(){
 	let [ loading, setLoading ] = useState(false)
 
 	useEffect(() => {
+		setMessages(['Warning: many new tokens are scams. Do not buy unless you know what you are doing. Many new liquidity pools have their liquidity pulled soon after creation. New tokens can also be named the same as other tokens to trick users into buying them. Many tokens self destruct their contracts soon after launch. There are many tricks so be wary. This site is just for monitoring new pools.'])
+	}, [])
+
+	useEffect(() => {
 		setNumberOfPools(null)
 		setPools({})
 		setStarted(false)
@@ -67,19 +71,27 @@ export default function FactoryMonitor(){
 
 		setLoading(true)
 		const factoryContract = new ethers.Contract(selected.factoryAddress, factory_abi, connection.provider)
-		let factoryPools = await factoryContract.allPairsLength()
 
-		if (numberOfPools)
-			poolsFromIndex(numberOfPools, factoryPools.toNumber(), factoryContract)
-		else
-			poolsFromIndex(factoryPools.toNumber() - 5, factoryPools.toNumber(), factoryContract)
+		try {
+			let factoryPools = await factoryContract.allPairsLength()
 
-		setNumberOfPools(factoryPools.toString())
+			if (numberOfPools)
+				poolsFromIndex(numberOfPools, factoryPools.toNumber(), factoryContract)
+			else
+				poolsFromIndex(factoryPools.toNumber() - 5, factoryPools.toNumber(), factoryContract)
+
+			setNumberOfPools(factoryPools.toString())
+		}catch(e){
+			console.error(e)
+			tempMessages.push('Not a factory')
+			setTimeout(() => setLoading(false), 400)
+			setStarted(false)
+		}
 	}
 
  	return (
  		<div className="container">
- 			<h1 className="is-size-3 mb-2">Factory Monitor</h1>
+ 			<h1 className="is-size-3 ">Factory Monitor</h1>
 
  			<Notice messages={messages} setMessages={setMessages}></Notice>
 
@@ -91,7 +103,7 @@ export default function FactoryMonitor(){
 
  			<h3 className="is-size-3 mb-2 has-text-danger">{selected.amm}</h3>
 
- 			<div className="is-size-4 mb-4">
+ 			<div className="is-size-4 mb-3">
  				Liquidity pools registered with factory: <span className="has-text-info">{numberOfPools && numberOfPools.toLocaleString()}</span>
  				<button className="button is-loading loading-button" style={{visibility: loading ? 'visible' : 'hidden'}}></button>
  			</div>
@@ -174,7 +186,7 @@ export default function FactoryMonitor(){
 
 
  		Promise.all(promises).then(res => {
-			setTimeout(() => setLoading(false), 200)	
+			setTimeout(() => setLoading(false), 400)	
  			setPools(prevState => ({...prevState, ...collectedPools}))
  		})
 	}
@@ -187,9 +199,7 @@ export default function FactoryMonitor(){
 			lpContract.token1(),
 			lpContract.name(),
 			lpContract.symbol(),
-			lpContract.decimals(),
-			lpContract.getReserves(),
-			lpContract.totalSupply(),
+			lpContract.decimals()
 		]
 		return Promise.all(promises)
 	}

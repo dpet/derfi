@@ -22,7 +22,8 @@ function Header() {
 	}, [])
 
 	return (
-		<nav className="navbar is-dark">
+		<>
+		{/*<nav className="navbar is-dark">
 			<div className="container">
 			  <div className="navbar-brand">
 			  	<NavLink className="navbar-item" exact to="/">
@@ -36,14 +37,14 @@ function Header() {
 			  <div id="navbarExampleTransparentExample" className="navbar-menu">
 			    <div className="navbar-start">
 
-			      {/*<div className="navbar-item has-dropdown is-hoverable">
+			      <div className="navbar-item has-dropdown is-hoverable">
 			        <a className="navbar-link">LP</a>
 			        <div className="navbar-dropdown">
 			          <NavLink activeClassName="is-active" className="navbar-item" to="/factory">Factory Monitor</NavLink>
 			          <NavLink activeClassName="is-active" className="navbar-item" to="/liquidity_pools">Liquidity Pool Monitor</NavLink>
 			        </div>
 			      </div>
-			      <NavLink activeClassName="is-active" className="navbar-item" to="/docs">Docs</NavLink>*/}
+			      <NavLink activeClassName="is-active" className="navbar-item" to="/docs">Docs</NavLink>
 
 			    </div>
 
@@ -54,7 +55,31 @@ function Header() {
 			    </div>
 			  </div>
 		  </div>
-		</nav>
+		</nav>*/}
+
+
+		<div className="custom-menu">
+			<div className="container">
+				<nav class="level is-mobile">
+
+					<div class="level-left">
+						<div class="level-item">
+							<NavLink className="navbar-item menu-title" exact to="/">
+								<h1 className="is-size-3 menu-title">DerfiDefi</h1>
+							</NavLink>
+						</div>
+					</div>
+
+
+					<div class="level-right">
+						<div class="level-item">
+							<button onClick={ethersConnect} className={'button connectButton ' + (connection.connected ? 'is-success' : '')}>{connection.connected ? `${connection.networkName.toUpperCase()} ${connection.networkId}` : 'Connect Metamask'}</button>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</>
 	)
 }
 
