@@ -23,7 +23,8 @@ function App() {
 
           <Switch>
             <Route exact path="/">
-              <Home></Home>
+              {/*<Home></Home>*/}
+              <FactoryMonitor></FactoryMonitor>
             </Route>
 
             <Route exact path="/factory">

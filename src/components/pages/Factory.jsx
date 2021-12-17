@@ -23,6 +23,7 @@ export default function FactoryMonitor(){
 	let [ pools, setPools ] = useState({})
 
 	let [ started, setStarted ] = useState(false)
+	let [ loading, setLoading ] = useState(false)
 
 	useEffect(() => {
 		setNumberOfPools(null)
@@ -34,15 +35,19 @@ export default function FactoryMonitor(){
 		load()
 	}, [started])
 
+	useEffect(() => {
+		console.log(pools)
+	}, [pools])
+
 	useInterval(
 		() => load(), 
-		started ? 5000 : null
+		started ? 10000 : null
 	)
 
 	async function load(){
 		if (!started)
 			return
-
+		
 		let tempMessages = []
 
 		if (!connection.connected)
@@ -60,6 +65,7 @@ export default function FactoryMonitor(){
 			return;
 		}
 
+		setLoading(true)
 		const factoryContract = new ethers.Contract(selected.factoryAddress, factory_abi, connection.provider)
 		let factoryPools = await factoryContract.allPairsLength()
 
@@ -68,7 +74,7 @@ export default function FactoryMonitor(){
 		else
 			poolsFromIndex(factoryPools.toNumber() - 5, factoryPools.toNumber(), factoryContract)
 
-		setNumberOfPools(factoryPools.toString())		
+		setNumberOfPools(factoryPools.toString())
 	}
 
  	return (
@@ -86,7 +92,8 @@ export default function FactoryMonitor(){
  			<h3 className="is-size-3 mb-2 has-text-danger">{selected.amm}</h3>
 
  			<div className="is-size-4 mb-4">
- 				Liquidity pools registered with factory: <span className="has-text-info">{numberOfPools && numberOfPools.toLocaleString() - 1}</span>
+ 				Liquidity pools registered with factory: <span className="has-text-info">{numberOfPools && numberOfPools.toLocaleString()}</span>
+ 				<button className="button is-loading loading-button" style={{visibility: loading ? 'visible' : 'hidden'}}></button>
  			</div>
 
  			<div className="mb-2">
@@ -101,6 +108,9 @@ export default function FactoryMonitor(){
 
  		let collectedPools = {}
  		let promises = []
+
+ 		if (start < 0)
+ 			start = 0;
 
  		for (let a = start; a < end; a++){
  			collectedPools[a] = {index: a}
@@ -133,10 +143,16 @@ export default function FactoryMonitor(){
 		 						] = res
 
 		 						getTokenAmounts(collectedPools[a].address).then(res => {
-		 							console.log(res)
+		 							collectedPools[a].token_1_amount = ethers.utils.formatUnits(res[0]._reserve0, collectedPools[a].token_1_decimals)
+		 							collectedPools[a].token_2_amount = ethers.utils.formatUnits(res[0]._reserve1, collectedPools[a].token_2_decimals)
 
+		 							collectedPools[a].lp_amount = ethers.utils.formatUnits(res[1], collectedPools[a].decimals)
 		 							resolve()
 		 						})
+		 						.catch(e => {
+		 							console.error(a, e)
+				 					resolve()
+				 				})
 		 					})
 		 					.catch(e => {
 			 					resolve()
@@ -156,8 +172,9 @@ export default function FactoryMonitor(){
  			}))
  		}
 
+
  		Promise.all(promises).then(res => {
- 			console.log('all', collectedPools)
+			setTimeout(() => setLoading(false), 200)	
  			setPools(prevState => ({...prevState, ...collectedPools}))
  		})
 	}

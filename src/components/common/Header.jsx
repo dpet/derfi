@@ -36,16 +36,15 @@ function Header() {
 			  <div id="navbarExampleTransparentExample" className="navbar-menu">
 			    <div className="navbar-start">
 
-			      <div className="navbar-item has-dropdown is-hoverable">
+			      {/*<div className="navbar-item has-dropdown is-hoverable">
 			        <a className="navbar-link">LP</a>
-
 			        <div className="navbar-dropdown">
 			          <NavLink activeClassName="is-active" className="navbar-item" to="/factory">Factory Monitor</NavLink>
 			          <NavLink activeClassName="is-active" className="navbar-item" to="/liquidity_pools">Liquidity Pool Monitor</NavLink>
 			        </div>
 			      </div>
-			      
-			      <NavLink activeClassName="is-active" className="navbar-item" to="/docs">Docs</NavLink>
+			      <NavLink activeClassName="is-active" className="navbar-item" to="/docs">Docs</NavLink>*/}
+
 			    </div>
 
 			    <div className="navbar-end">
