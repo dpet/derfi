@@ -24,6 +24,7 @@ export default function FactoryMonitor(){
 
 	let [ started, setStarted ] = useState(false)
 	let [ loading, setLoading ] = useState(false)
+	let [ helpToggle, setHelpToggle ] = useState(false)
 
 	useEffect(() => {
 		setMessages(['Warning: many new tokens are scams. Do not buy unless you know what you are doing. Many new liquidity pools have their liquidity pulled soon after creation. New tokens can also be named the same as other tokens to trick users into buying them. Many tokens self destruct their contracts soon after launch. There are many tricks so be wary. This site is just for monitoring new pools.'])
@@ -42,6 +43,12 @@ export default function FactoryMonitor(){
 	useEffect(() => {
 		console.log(pools)
 	}, [pools])
+
+	useEffect(() => {
+		if (connection.warning.length > 0)
+			setMessages(connection.warning)
+
+	}, [connection])
 
 	useInterval(
 		() => load(), 
@@ -91,7 +98,11 @@ export default function FactoryMonitor(){
 
  	return (
  		<div className="container">
- 			<h1 className="is-size-3 ">Factory Monitor</h1>
+ 			<h1 className="is-size-3 mb-2">Factory Monitor <span className="help-toggle ml-2 has-text-warning" onClick={() => setHelpToggle(!helpToggle)}>help {helpToggle ? '▼' : '▲'}</span></h1>
+
+ 			{helpToggle && <div className="help-content mb-4 has-text-warning">
+ 				<p>This tool checks how many Liquidity Pools have been registered with a factory. You can use the drop down to select a factory from the list or you can enter your own factory address. It will check whatever network is selected in metamask for the factory. Once it sees how many Liquidity Pools are registered with a factory, it will grab the last few Liquidity Pools and show the amounts of tokens in the pool including the LP amount. It will then continue to monitor the factory for new pools. If you select an active pool like Pancakeswap V2 then you will see new pools frequently. The pool values will not be updated after the initial fetch, so this tool is not good for monitoring changes in a pool, it only gives a snapshot of new pools when they are created. It uses Metamask to get its data.</p>
+ 			</div>}
 
  			<Notice messages={messages} setMessages={setMessages}></Notice>
 

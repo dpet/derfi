@@ -28,10 +28,16 @@
   }
 }
 
+// custom menu
 .custom-menu{
   margin-bottom: 20px;
   border-bottom: 1px solid #000000;
   background: #202020 !important;
+}
+
+.custom-menu-item{
+  color: white !important;
+  margin-right: 20px;
 }
 
 .menu-title, .menu-title:hover{
@@ -70,6 +76,10 @@ html, body{
 }
 .blue{
   color: #88f;
+}
+
+.light-blue{
+  color: #d0d0ff;
 }
 
 .address-input{
@@ -133,5 +143,28 @@ html, body{
 .loading-button{
   background: rgba(0, 0, 0, 0);
   border: none;
+}
 
+// factory-list
+.factory-list{
+  .factory-list-name{
+    display: inline-block;
+    min-width: 140px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .factory-list-amount{
+
+  }
+}
+
+// help
+
+.help-toggle{
+  font-size: 14px;
+}
+
+.help-content{
+  
 }

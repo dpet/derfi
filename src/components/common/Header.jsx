@@ -60,25 +60,33 @@ function Header() {
 
 		<div className="custom-menu">
 			<div className="container">
-				<nav class="level is-mobile">
+				<nav className="level is-mobile">
 
-					<div class="level-left">
-						<div class="level-item">
+					<div className="level-left">
+						<div className="level-item">
 							<NavLink className="navbar-item menu-title" exact to="/">
 								<h1 className="is-size-3 menu-title">DerfiDefi</h1>
 							</NavLink>
 						</div>
+
+						<div className="level-item">
+							<NavLink className="custom-menu-item" to="/factoryMonitor">Factory Monitor</NavLink>
+							<NavLink className="custom-menu-item" to="/factoryLeaderboard">Factory Leaderboard</NavLink>
+						</div>
 					</div>
 
 
-					<div class="level-right">
-						<div class="level-item">
+
+
+					<div className="level-right">
+						<div className="level-item">
 							<button onClick={ethersConnect} className={'button connectButton ' + (connection.connected ? 'is-success' : '')}>{connection.connected ? `${connection.networkName.toUpperCase()} ${connection.networkId}` : 'Connect Metamask'}</button>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
+
 	</>
 	)
 }

@@ -19,22 +19,32 @@ export default function ConnectionProvider({children}){
 	    connected: false,
 	    provider: null,
 	    networkName: null,
-	    networkId: null
+	    networkId: null,
+	    warning: []
 	  });
 
 	  useInterval(() => checkNetwork(), 1000)
 
 	  async function ethersConnect(){
-	    const provider = new ethers.providers.Web3Provider(window.ethereum)
-	    const network = await provider.getNetwork()
 
-	    setConnection(prevState => ({
-	      ...prevState,
-	      connected: true,
-	      provider: provider,
-	      networkName: network.name,
-	      networkId: network.chainId
-	    }))
+	    try {
+	    	const provider = new ethers.providers.Web3Provider(window.ethereum)
+		    const network = await provider.getNetwork()
+
+		    setConnection(prevState => ({
+		      ...prevState,
+		      connected: true,
+		      provider: provider,
+		      networkName: network.name,
+		      networkId: network.chainId
+		    }))
+		}
+		catch(e){
+			setConnection(prevState => ({
+		      ...prevState,
+		      warning: ['Metamask not available'],
+		    }))
+		}
 	  }
 
 	  // updates name and id of network if it has changed, gets details from metamask

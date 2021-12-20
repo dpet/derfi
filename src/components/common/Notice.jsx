@@ -5,9 +5,9 @@ export default function Notice({messages, setMessages}){
 
 	return <div> 
 		{messages.length > 0 && <div className="notification warning is-danger is-light mb-4" onClick={() => setMessages([])}>
-		  <button class="delete"></button>
+		  <button className="delete"></button>
 		  <ul>
-		  	{messages.map(message => <li>{message}</li>)}
+		  	{messages.map(message => <li key={message}>{message}</li>)}
 		  </ul>
 		</div>}
 	</div>
