@@ -2,7 +2,12 @@
 html, body{
   background-color: #303030;
   color: white;
-  min-height: 100%;
+  min-height: 100vh;
+}
+
+.main{
+  min-height: 80vh;
+  margin-bottom: 100px;
 }
 
 // custom menu
@@ -93,6 +98,9 @@ html, body{
 }
 .light-blue{
   color: #d0d0ff;
+}
+.light-green{
+  color: #a0ffa0;
 }
 
 .address-input{
@@ -193,4 +201,21 @@ html, body{
   color: white;
   background: #333;
   border: 1px solid #355;
+}
+
+// docs
+.docs{
+  a {
+   color: #b0b0ff;
+  }
+  a:hover {
+   color: #c0c0ff;
+  }
+}
+
+// footer
+.footer{
+  background: #202020;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }

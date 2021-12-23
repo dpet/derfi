@@ -32,6 +32,10 @@ export default function Header() {
 							<NavLink className="menu-item" to="/chefMonitor">Chef Monitor</NavLink>
 						</div>
 					</div>*/}
+
+					<div className="level-item">
+						<NavLink className="menu-item has-text-white" to="/docs">Docs</NavLink>
+					</div>
 				</div>
 
 				<div className="level-right">

@@ -2,6 +2,7 @@
 import './App.scss';
 import ConnectionProvider from './components/helpers/ConnectionProvider.js';
 import Header from './components/common/Header.jsx';
+import Footer from './components/common/Footer.jsx';
 import Home from './components/pages/Home.jsx';
 import FactoryMonitor from './components/pages/FactoryMonitor.jsx';
 import FactoryLeaderboard from './components/pages/FactoryLeaderboard.jsx';
@@ -24,33 +25,40 @@ function App() {
         <ConnectionProvider>
           <Header></Header>
 
-          <Switch>
-            <Route exact path="/">
-              {/*<Home></Home>*/}
-              <FactoryMonitor></FactoryMonitor>
-            </Route>
+          <div className="main">
+            <Switch>
+              <Route exact path="/">
+                {/*<Home></Home>*/}
+                <FactoryMonitor></FactoryMonitor>
+              </Route>
 
-            <Route exact path="/factoryMonitor">
-              <FactoryMonitor></FactoryMonitor>
-            </Route>
+              <Route exact path="/factoryMonitor">
+                <FactoryMonitor></FactoryMonitor>
+              </Route>
 
-            <Route exact path="/factoryLeaderboard">
-              <FactoryLeaderboard></FactoryLeaderboard>
-            </Route>
+              <Route exact path="/factoryLeaderboard">
+                <FactoryLeaderboard></FactoryLeaderboard>
+              </Route>
 
-            <Route exact path="/liquidityPoolFinder">
-              <LiquidityPoolFinder></LiquidityPoolFinder>
-            </Route>
+              <Route exact path="/liquidityPoolFinder">
+                <LiquidityPoolFinder></LiquidityPoolFinder>
+              </Route>
 
-            <Route exact path="/liquidityPoolMonitor">
-              <LiquidityPoolMonitor></LiquidityPoolMonitor>
-            </Route>
+              <Route exact path="/liquidityPoolMonitor">
+                <LiquidityPoolMonitor></LiquidityPoolMonitor>
+              </Route>
 
-            <Route exact path="/chefMonitor">
-              <ChefMonitor></ChefMonitor>
-            </Route>
-          
-          </Switch>
+              <Route exact path="/chefMonitor">
+                <ChefMonitor></ChefMonitor>
+              </Route>
+
+              <Route exact path="/docs">
+                <Docs></Docs>
+              </Route>
+            </Switch>
+          </div>
+
+          <Footer></Footer>
         </ConnectionProvider>
       </Router>
     </div>
