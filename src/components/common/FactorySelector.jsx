@@ -2,7 +2,7 @@ import { networks } from '../../data/amm.js';
 import { useState, useEffect } from 'react';
 import { useConnection } from '../helpers/ConnectionProvider.js';
 
-export default function FactorySelector({selected, setSelected, children}){
+export default function FactorySelector({selected, setSelected, type, children}){
 	const connection = useConnection()
 
 	// set initial selections
@@ -10,7 +10,8 @@ export default function FactorySelector({selected, setSelected, children}){
 		setSelected({
 			network: Object.keys(networks)[0],
 			amm: networks[Object.keys(networks)[0]].amms[0].name,
-			factoryAddress: networks[Object.keys(networks)[0]].amms[0].factory
+			factoryAddress: networks[Object.keys(networks)[0]].amms[0].factory,
+			chefAddress: networks[Object.keys(networks)[0]].amms[0].chef,
 		})
 	}, [])
 
@@ -36,7 +37,8 @@ export default function FactorySelector({selected, setSelected, children}){
 		if (selected.network && selected.amm){
 			setSelected(prevState => ({
 				...prevState,
-				factoryAddress: networks[selected.network].amms.find(ammItem => ammItem.name === selected.amm).factory
+				factoryAddress: networks[selected.network].amms.find(ammItem => ammItem.name === selected.amm).factory,
+				chefAddress: networks[selected.network].amms.find(ammItem => ammItem.name === selected.amm).chef,
 			}))
 		}
 	}, [selected.amm])
@@ -58,6 +60,7 @@ export default function FactorySelector({selected, setSelected, children}){
 			setSelected(prevState => ({
 				...prevState,
 				factoryAddress: '',
+				chefAddress: '',
 				amm: ''
 			}))
 		}
@@ -72,7 +75,8 @@ export default function FactorySelector({selected, setSelected, children}){
 		if (!val){
 			setSelected(prevState => ({
 				...prevState,
-				factoryAddress: ''
+				factoryAddress: '',
+				chefAddress: ''
 			}))
 		}
 
@@ -83,16 +87,28 @@ export default function FactorySelector({selected, setSelected, children}){
 	}
 
 	function userChangeFactoryAddress(e){
-		setSelected(prevState => ({
-			...prevState,
-			network: '',
-			amm: '',
-			factoryAddress: e.target.value
-		}))
+		if (type === 'factory'){
+			setSelected(prevState => ({
+				...prevState,
+				network: '',
+				amm: '',
+				factoryAddress: e.target.value,
+				chefAddress: ''
+			}))
+		}
+		else if (type === 'chef'){
+			setSelected(prevState => ({
+				...prevState,
+				network: '',
+				amm: '',
+				factoryAddress: '',
+				chefAddress: e.target.value
+			}))
+		}
 	}
 
 	return <div className="mb-4">
-		<span>Select a factory or enter a factory address</span>
+		<span>Select a {type} or enter a {type} address</span>
 		<div className="field is-grouped mb-0">
 			<div className="select is-success mr-2">
 				<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
@@ -108,9 +124,17 @@ export default function FactorySelector({selected, setSelected, children}){
 				</select>
 			</div>
 
-			<div className="control">
-				<input className="input is-primary address-input" type="text" placeholder="factory address" value={selected.factoryAddress} onChange={e => userChangeFactoryAddress(e)} />
-			</div>
+			{type === 'factory' &&
+				<div className="control">
+					<input className="input is-primary address-input" type="text" placeholder={`${type} address`} value={selected.factoryAddress} onChange={e => userChangeFactoryAddress(e)} />
+				</div>
+			}
+
+			{type === 'chef' &&
+				<div className="control">
+					<input className="input is-primary address-input" type="text" placeholder={`${type} address`} value={selected.chefAddress} onChange={e => userChangeFactoryAddress(e)} />
+				</div>
+			}
 
 			{children}
 		</div>

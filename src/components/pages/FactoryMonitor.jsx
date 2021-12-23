@@ -16,6 +16,7 @@ export default function FactoryMonitor(){
 		network: '',
 		amm: '',
 		factoryAddress: '',
+		chefAddress: '',
 		networkMatch: null
 	})
 
@@ -25,6 +26,9 @@ export default function FactoryMonitor(){
 	let [ started, setStarted ] = useState(false)
 	let [ loading, setLoading ] = useState(false)
 	let [ helpToggle, setHelpToggle ] = useState(false)
+
+	let [ bell, setBell ] = useState(false)
+	let beep_1 = new Audio('beep_1.wav');
 
 	useEffect(() => {
 		setMessages(['Warning: many new tokens are scams. Do not buy unless you know what you are doing. Many new liquidity pools have their liquidity pulled soon after creation. New tokens can also be named the same as other tokens to trick users into buying them. Many tokens self destruct their contracts soon after launch. There are many tricks so be wary. This site is just for monitoring new pools.'])
@@ -101,15 +105,23 @@ export default function FactoryMonitor(){
  			<h1 className="is-size-3 mb-2">Factory Monitor <span className="help-toggle ml-2 has-text-warning" onClick={() => setHelpToggle(!helpToggle)}>help {helpToggle ? '▼' : '▲'}</span></h1>
 
  			{helpToggle && <div className="help-content mb-4 has-text-warning">
- 				<p>This tool checks how many Liquidity Pools have been registered with a factory. You can use the drop down to select a factory from the list or you can enter your own factory address. It will check whatever network is selected in metamask for the factory. Once it sees how many Liquidity Pools are registered with a factory, it will grab the last few Liquidity Pools and show the amounts of tokens in the pool including the LP amount. It will then continue to monitor the factory for new pools. If you select an active pool like Pancakeswap V2 then you will see new pools frequently. The pool values will not be updated after the initial fetch, so this tool is not good for monitoring changes in a pool, it only gives a snapshot of new pools when they are created. It uses Metamask to get its data.</p>
+ 				<p>This tool checks how many Liquidity Pools have been registered with a factory and then shows recent and new pools as they are created. You can use the drop down to select a factory from the list or you can enter your own factory address. It will check whatever network is selected in metamask for the factory. Once it sees how many Liquidity Pools are registered with a factory, it will grab the last few Liquidity Pools and show the amounts of tokens in the pool including the LP amount. It will then continue to monitor the factory for new pools. If you select an active pool like Pancakeswap V2 then you will see new pools frequently. The pool values will not be updated after the initial fetch, so this tool is not good for monitoring changes in a pool, it only gives a snapshot of new pools when they are created. It uses Metamask to get its data.</p>
  			</div>}
 
  			<Notice messages={messages} setMessages={setMessages}></Notice>
 
  			<FactorySelector 
  				selected={selected} 
- 				setSelected={setSelected}>
- 					<button className="button is-primary" onClick={() => setStarted(true)}>Load</button>
+ 				setSelected={setSelected}
+ 				type="factory">
+ 					<button className="button is-primary mr-5" onClick={() => setStarted(true)}>Load</button>
+ 					<label className="checkbox mt-5 has-text-white">
+					  <input className="mr-2" type="checkbox" 
+					  	type="checkbox"
+				        checked={bell}
+				        onChange={() => setBell(!bell)} />
+					    	bell
+					</label>
  			</FactorySelector>
 
  			<h3 className="is-size-3 mb-2 has-text-danger">{selected.amm}</h3>
@@ -199,6 +211,11 @@ export default function FactoryMonitor(){
  		Promise.all(promises).then(res => {
 			setTimeout(() => setLoading(false), 400)	
  			setPools(prevState => ({...prevState, ...collectedPools}))
+
+ 			console.log(start, end)
+
+ 			if (bell && end > start)
+ 				beep_1.play().then()
  		})
 	}
 

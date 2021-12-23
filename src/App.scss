@@ -1,31 +1,8 @@
-.navbar{
-  margin-bottom: 20px;
-  border-bottom: 1px solid #000000;
-  background: #202020 !important;
 
-  .container{
-    max-width: 75% !important;
-  }
-
-
-
-  .navbar-item.is-active{
-    color: #00f;
-  }
-
-  .navbar-dropdown{
-    border-top: 2px solid #555;
-  }
-
-  .navbar-dropdown, .navbar-item{
-    color: white !important;
-    background: #202020 !important;
-  }
-
-  .navbar-item:hover{
-    color: #ccc !important;
-    background: #202020 !important;
-  }
+html, body{
+  background-color: #303030;
+  color: white;
+  min-height: 100%;
 }
 
 // custom menu
@@ -47,16 +24,48 @@
   margin-right: 20px;
 }
 
+.menu-dropdown{
+  position: relative;
+  margin-right: 30px !important;
+}
+
+.menu-dropdown-title{
+
+}
+
+.menu-dropdown-content{
+  display: none;
+  position: absolute;
+  padding-top: 46px;
+  top: 0px;
+  flex-direction: column;
+  z-index: 10;
+
+  .menu-item{
+    white-space: nowrap;
+    color: white;
+    padding: 15px 25px;
+    background: #202020;
+    border: 1px solid #303030;
+  }
+
+  .menu-item:hover{
+    background: #262626;
+  }
+
+}
+
+.menu-dropdown:hover .menu-dropdown-content, .menu-dropdown-content:hover{
+  display: flex;
+}
+
+
+
+// connect button
 .connectButton, .connectButton:hover, .connectButton:focus{
   font-weight: 700;
   font-size: 18px;
   // color: #777;
-}
-
-html, body{
-  background-color: #303030;
-  color: white;
-  min-height: 100%;
 }
 
 .connectButton.green, .connectButton:hover.green, .connectButton:focus.green{
@@ -64,20 +73,24 @@ html, body{
   border: 1px solid #0b0;
 }
 
+
+
 .hr{
   border-top: 1px solid #ccc;
 }
 
 .red{
-  color: #f00;
+  color: #f00 !important;
 }
 .green{
-  color: #0b0;
+  color: #0b0 !important;
 }
 .blue{
   color: #88f;
 }
-
+.light-grey{
+  color: #777 !important;
+}
 .light-blue{
   color: #d0d0ff;
 }
@@ -166,5 +179,18 @@ html, body{
 }
 
 .help-content{
-  
+
+}
+
+// dark table
+.dark-table th{
+  color: #cfc !important;
+  background: #333;
+  border: 1px solid #355;
+} 
+
+.dark-table, .dark-table td{
+  color: white;
+  background: #333;
+  border: 1px solid #355;
 }

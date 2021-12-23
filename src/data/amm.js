@@ -74,7 +74,7 @@ networks.bsc.amms = [
 		name: 'Pancakeswap V2',
 		router: '0x10ed43c718714eb63d5aa57b78b54704e256024e',
 		factory: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
-		chef: '',
+		chef: '0x73feaa1ee314f8c655e354234017be2193c9e24e',
 		timelock: '',
 		proof: '',
 	},

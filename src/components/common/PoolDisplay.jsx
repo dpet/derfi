@@ -1,12 +1,12 @@
 
 
-export default function PoolDisplay({pools}){
+export default function PoolDisplay({children, pools}){
 
 
 	return <div>
 		{Object.values(pools).reverse().map(pool => <div className="pool mb-4" key={pool.address}>
 			<div>
-				<span  className="pool-index">{pool.index}</span>
+				<span className="pool-index">{pool.index}</span>
 				<span className=" has-text-info">{pool.token_1_symbol} / {pool.token_2_symbol}</span>
 			</div>
 
@@ -40,6 +40,8 @@ export default function PoolDisplay({pools}){
 					</tr>
 				</tbody>
 			</table>
+
+			{children}
 
 			{/*<div>{pool.symbol 
 				? <>
