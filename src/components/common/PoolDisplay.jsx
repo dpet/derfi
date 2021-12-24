@@ -10,7 +10,7 @@ export default function PoolDisplay({children, pools}){
 				<span className=" has-text-info">{pool.token_1_symbol} / {pool.token_2_symbol}</span>
 			</div>
 
-			<table>
+			<table className="pool-display-table">
 				<tbody>
 					<tr>{pool.symbol 
 						? <>
@@ -18,7 +18,7 @@ export default function PoolDisplay({children, pools}){
 						  	<td className="pool-token-amount">{pool.lp_amount}</td>
 						  </>
 						: <td className="has-text-grey-light">Token Unavailable</td>}
-						<td className="is-inline-block ml-2 has-text-primary">{pool.address}</td>
+						<td className="has-text-primary">{pool.address}</td>
 					</tr>
 
 					<tr>{pool.symbol 
@@ -27,7 +27,7 @@ export default function PoolDisplay({children, pools}){
 						  	<td className="pool-token-amount">{pool.token_1_amount}</td>
 						  </>
 						: <td className="has-text-grey-light">Token Unavailable</td>}
-						<td className="is-inline-block ml-2 has-text-primary">{pool.token_1}</td>
+						<td className="has-text-primary">{pool.token_1}</td>
 					</tr>
 
 					<tr>{pool.symbol 
@@ -36,7 +36,7 @@ export default function PoolDisplay({children, pools}){
 						  	<td className="pool-token-amount">{pool.token_2_amount}</td>
 						  </>
 						: <td className="has-text-grey-light">Token Unavailable</td>}
-						<td className="is-inline-block ml-2 has-text-primary">{pool.token_2}</td>
+						<td className="has-text-primary">{pool.token_2}</td>
 					</tr>
 				</tbody>
 			</table>

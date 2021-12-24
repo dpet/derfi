@@ -8,33 +8,35 @@ export default function Header() {
 
 	return <div className="custom-menu">
 		<div className="container">
-			<nav className="level is-mobile">
+			<nav className="level">
 				<div className="level-left">
 					<div className="level-item">
-						<NavLink className="navbar-item menu-title" exact to="/">
+						<NavLink className="navbar-item" exact to="/">
 							<h1 className="is-size-3 menu-title">DerfiDefi</h1>
 						</NavLink>
 					</div>
 
-					<div className="level-item menu-dropdown">
-						<div className="menu-dropdown-title">Liquidity Pools</div>
-						<div className="menu-dropdown-content">
-							<NavLink className="menu-item" to="/factoryMonitor">Factory Monitor</NavLink>
-							<NavLink className="menu-item" to="/factoryLeaderboard">Factory Leaderboard</NavLink>
-							<NavLink className="menu-item" to="/liquidityPoolFinder">Liquidity Pool Finder</NavLink>
-							<NavLink className="menu-item" to="/liquidityPoolMonitor">Liquidity Pool Monitor</NavLink>
+					<div className="level-item menu-links">
+						<div className="menu-dropdown">
+							<div className="menu-dropdown-title">Liquidity Pools</div>
+							<div className="menu-dropdown-content">
+								<NavLink className="menu-item" to="/factoryMonitor">Factory Monitor</NavLink>
+								<NavLink className="menu-item" to="/factoryLeaderboard">Factory Leaderboard</NavLink>
+								<NavLink className="menu-item" to="/liquidityPoolFinder">Liquidity Pool Finder</NavLink>
+								<NavLink className="menu-item" to="/liquidityPoolMonitor">Liquidity Pool Monitor</NavLink>
+							</div>
 						</div>
-					</div>
 
-					{/*<div className="level-item menu-dropdown">
-						<div className="menu-dropdown-title">Staking Pools</div>
-						<div className="menu-dropdown-content">
-							<NavLink className="menu-item" to="/chefMonitor">Chef Monitor</NavLink>
+						{/*<div className="menu-dropdown">
+							<div className="menu-dropdown-title">Staking Pools</div>
+							<div className="menu-dropdown-content">
+								<NavLink className="menu-item" to="/chefMonitor">Chef Monitor</NavLink>
+							</div>
+						</div>*/}
+
+						<div className="">
+							<NavLink className="menu-item has-text-white" to="/docs">Docs</NavLink>
 						</div>
-					</div>*/}
-
-					<div className="level-item">
-						<NavLink className="menu-item has-text-white" to="/docs">Docs</NavLink>
 					</div>
 				</div>
 

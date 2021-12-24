@@ -109,19 +109,23 @@ export default function FactorySelector({selected, setSelected, type, children})
 
 	return <div className="mb-4">
 		<span>Select a {type} or enter a {type} address</span>
-		<div className="field is-grouped mb-0">
-			<div className="select is-success mr-2">
-				<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
-					<option value=''>Network</option>
-					{Object.keys(networks).map(networkName => <option key={networkName} value={networkName}>{networkName}</option>)}
-				</select>
+		<div className="field is-grouped is-grouped-multiline mb-0">
+			<div className="control">
+				<div className="select is-success mr-2">
+					<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
+						<option value=''>Network</option>
+						{Object.keys(networks).map(networkName => <option key={networkName} value={networkName}>{networkName}</option>)}
+					</select>
+				</div>
 			</div>
 
-			<div className="select is-info mr-2">
-				<select onChange={e => {userChangeAmm(e.target.value)}} value={selected.amm}>
-					<option value=''>Amm</option>
-					{selected.network && networks[selected.network].amms.map(ammItem => <option key={ammItem.name} value={ammItem.name}>{ammItem.name}</option>)}
-				</select>
+			<div className="control">
+				<div className="select is-info mr-2">
+					<select onChange={e => {userChangeAmm(e.target.value)}} value={selected.amm}>
+						<option value=''>Amm</option>
+						{selected.network && networks[selected.network].amms.map(ammItem => <option key={ammItem.name} value={ammItem.name}>{ammItem.name}</option>)}
+					</select>
+				</div>
 			</div>
 
 			{type === 'factory' &&

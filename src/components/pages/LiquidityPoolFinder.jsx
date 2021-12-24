@@ -167,7 +167,7 @@ export default function LiquidityPoolFinder(){
  			</FactorySelector>
 
  			<span>Enter two token addresses or an index</span>
- 			<div className="field is-grouped">
+ 			<div className="field is-grouped is-grouped-multiline">
 				<div className="control">
 					<input 
 						className="input is-primary address-input" 

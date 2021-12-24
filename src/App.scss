@@ -64,6 +64,14 @@ html, body{
   display: flex;
 }
 
+@media only screen and (max-width: 1023px) {
+
+  .menu-title{
+    margin-right: 0px;
+  }
+
+}
+
 
 
 // connect button
@@ -216,6 +224,34 @@ html, body{
 // footer
 .footer{
   background: #202020;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.bell{
+  margin-top: 22px;
+}
+
+// mobile
+@media only screen and (max-width: 1023px) {
+
+  .container{
+    margin: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .pool-display-table{
+    td{
+      border: 1px solid #555;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media only screen and (max-width: 574px) {
+  .bell{
+    margin-top: 10px;
+  }
 }

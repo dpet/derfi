@@ -115,7 +115,7 @@ export default function FactoryMonitor(){
  				setSelected={setSelected}
  				type="factory">
  					<button className="button is-primary mr-5" onClick={() => setStarted(true)}>Load</button>
- 					<label className="checkbox mt-5 has-text-white">
+ 					<label className="checkbox bell has-text-white">
 					  <input className="mr-2" type="checkbox" 
 					  	type="checkbox"
 				        checked={bell}

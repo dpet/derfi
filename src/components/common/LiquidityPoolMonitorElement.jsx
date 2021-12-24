@@ -139,7 +139,7 @@ export default function LiquidityPoolMonitorElement({ setMessages }){
 	}
 
 	return <div>
-		<div className="field is-grouped mt-6 mb-4">
+		<div className="field is-grouped is-grouped-multiline mt-6 mb-4">
 			<div className="control">
 				<input 
 					className="input is-info address-input" 
@@ -157,7 +157,7 @@ export default function LiquidityPoolMonitorElement({ setMessages }){
 
 			<button className="button is-loading loading-button mr-2" style={{visibility: loading ? 'visible' : 'hidden'}}></button>
 			
-			<label className="checkbox mt-4 has-text-white">
+			<label className="checkbox bell has-text-white">
 			  <input className="mr-2" type="checkbox" 
 			  	type="checkbox"
 		        checked={bell}

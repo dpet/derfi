@@ -24,6 +24,10 @@ export default function Docs(){
  			</p>
 
  			<p className="is-size-5 mb-5">
+ 				When a Liquidity Pool is registered with a Factory, it is given an index number. The Factory has methods to allow you to find a Liquidity Pool by providing two token addresses or by providing an index. The index is just what number the Pool is in the list of Pools. Unfortunately, if you provide two token adddresses to find a Pool, it does not return what index the Pool has.
+ 			</p>
+
+ 			<p className="is-size-5 mb-5">
  				Exchanges can create their own Factories or they can piggyback on the Factories of other exchanges. Some exchanges on Binance Smart Chain that have their own Factories are Pancakeswap, Sushiswap and Apeswap. Since these are each separate Factories, they can each have Liquidity Pools with the same tokens. 
  			</p>
 
