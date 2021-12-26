@@ -9,6 +9,7 @@ import FactoryLeaderboard from './components/pages/FactoryLeaderboard.jsx';
 import ChefMonitor from './components/pages/ChefMonitor.jsx';
 import LiquidityPoolFinder from './components/pages/LiquidityPoolFinder.jsx';
 import LiquidityPoolMonitor from './components/pages/LiquidityPoolMonitor.jsx';
+import ImpermanentLoss from './components/pages/ImpermanentLoss.jsx';
 import Docs from './components/pages/Docs.jsx';
 
 import {
@@ -50,6 +51,10 @@ function App() {
 
               <Route exact path="/chefMonitor">
                 <ChefMonitor></ChefMonitor>
+              </Route>
+
+              <Route exact path="/impermanentLoss">
+                <ImpermanentLoss></ImpermanentLoss>
               </Route>
 
               <Route exact path="/docs">

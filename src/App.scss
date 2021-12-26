@@ -64,14 +64,9 @@ html, body{
   display: flex;
 }
 
-@media only screen and (max-width: 1023px) {
-
-  .menu-title{
-    margin-right: 0px;
-  }
-
+.logo{
+  margin: 10px 0;
 }
-
 
 
 // connect button
@@ -113,6 +108,9 @@ html, body{
 
 .address-input{
   width: 400px;
+}
+.number-input{
+  width: 140px;
 }
 
 // warning 
@@ -188,6 +186,17 @@ html, body{
   }
 }
 
+.impermanent{
+  .factory-list-name{
+    min-width: 300px;
+    text-align: right;
+  }
+}
+
+.slider{
+  width: 400px;
+}
+
 // help
 
 .help-toggle{
@@ -255,3 +264,5 @@ html, body{
     margin-top: 10px;
   }
 }
+
+

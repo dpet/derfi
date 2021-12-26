@@ -11,7 +11,7 @@ export default function Header() {
 			<nav className="level">
 				<div className="level-left">
 					<div className="level-item">
-						<NavLink className="navbar-item" exact to="/">
+						<NavLink className="menu-item logo" exact to="/">
 							<h1 className="is-size-3 menu-title">DerfiDefi</h1>
 						</NavLink>
 					</div>
@@ -24,6 +24,7 @@ export default function Header() {
 								<NavLink className="menu-item" to="/factoryLeaderboard">Factory Leaderboard</NavLink>
 								<NavLink className="menu-item" to="/liquidityPoolFinder">Liquidity Pool Finder</NavLink>
 								<NavLink className="menu-item" to="/liquidityPoolMonitor">Liquidity Pool Monitor</NavLink>
+								<NavLink className="menu-item" to="/impermanentLoss">Impermanent Loss</NavLink>
 							</div>
 						</div>
 
