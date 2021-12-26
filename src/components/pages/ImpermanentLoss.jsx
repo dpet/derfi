@@ -27,6 +27,10 @@ export default function ImpermanentLoss(){
 			<p className="mb-3">
 				Keep the fees at 0 to see only the impermant loss.
 			</p>
+			<p className="mb-3">
+				The combined value fields show the value if one token is sold for the other. At the time of deposit it is assumed that the values equal eachother so if one token is sold for the other then the combined value is twice the token value sold to. ie. if the initial amounts are 1 Eth and 100 Dai then the combined value in Eth is 2 Eth since selling 100 Dai will get you 1 Eth. It is a way of representing the total value of the tokens combined and can be a useful way to compare them. The final combined value if the tokens are kept out of the pools relies on the final price change of the tokens since their values can vary and will likely not equal eachother.
+			</p>
+			
 		</div>}
 
 		<span>Name your tokens and set a starting amount for the pool</span>
