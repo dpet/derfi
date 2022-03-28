@@ -1,8 +1,4 @@
-
-
 export default function PoolDisplay({children, pools}){
-
-
 	return <div>
 		{Object.values(pools).reverse().map(pool => <div className="pool mb-4" key={pool.address}>
 			<div>
@@ -42,34 +38,6 @@ export default function PoolDisplay({children, pools}){
 			</table>
 
 			{children}
-
-			{/*<div>{pool.symbol 
-				? <>
-					<span className="pool-token-name has-text-warning">{pool.symbol} - {pool.name}</span>
-				  	<span className="pool-token-amount">{pool.lp_amount}</span>
-				  </>
-				: <span className="has-text-grey-light">Token Unavailable</span>}
-				<span className="is-inline-block ml-2 has-text-primary">{pool.address}</span>
-			</div>
-
-			<div>{pool.token_1_symbol 
-				? <>
-					<span className="pool-token-name">{pool.token_1_symbol} - {pool.token_1_name}</span>
-				  	<span className="pool-token-amount">{pool.token_1_amount}</span>
-				  </>
-				: <span className="has-text-grey-light">Token Unavailable</span>}
-				<span className="is-inline-block ml-2 has-text-primary">{pool.token_1}</span>
-			</div>
-
-			<div>{pool.token_2_symbol 
-				? <>
-					<span className="pool-token-name">{pool.token_2_symbol} - {pool.token_2_name}</span>
-					<span className="pool-token-amount">{pool.token_2_amount}</span>
-				  </>
-				: <span className="has-text-grey-light">Token Unavailable</span>}
-				<span className="is-inline-block ml-2 has-text-primary">{pool.token_2}</span>
-			</div>*/}
-
 		</div>)}
 	</div>
 }

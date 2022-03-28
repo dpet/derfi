@@ -4,6 +4,7 @@ import { useConnection } from '../helpers/ConnectionProvider.js';
 
 export default function FactorySelector({selected, setSelected, type, children}){
 	const connection = useConnection()
+	let [ customNetwork, setCustomNetwork ] = useState(false)
 
 	// set initial selections
 	useEffect(() => {
@@ -87,6 +88,7 @@ export default function FactorySelector({selected, setSelected, type, children})
 	}
 
 	function userChangeFactoryAddress(e){
+		setCustomNetwork(true)
 		if (type === 'factory'){
 			setSelected(prevState => ({
 				...prevState,
@@ -107,26 +109,48 @@ export default function FactorySelector({selected, setSelected, type, children})
 		}
 	}
 
-	return <div className="mb-4">
-		<span>Select a {type} or enter a {type} address</span>
-		<div className="field is-grouped is-grouped-multiline mb-0">
-			<div className="control">
-				<div className="select is-success mr-2">
-					<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
-						<option value=''>Network</option>
-						{Object.keys(networks).map(networkName => <option key={networkName} value={networkName}>{networkName}</option>)}
-					</select>
-				</div>
-			</div>
+	function customNetworkToggled(){
+		if (!customNetwork){
+			setSelected(prevState => ({
+				...prevState,
+				network: '',
+				amm: ''
+			}))
+		}
+		setCustomNetwork(!customNetwork)
+	}
 
-			<div className="control">
-				<div className="select is-info mr-2">
-					<select onChange={e => {userChangeAmm(e.target.value)}} value={selected.amm}>
-						<option value=''>Amm</option>
-						{selected.network && networks[selected.network].amms.map(ammItem => <option key={ammItem.name} value={ammItem.name}>{ammItem.name}</option>)}
-					</select>
+	return <div className="mb-4">
+		<div>Select a {type} or enter a {type} address</div>
+
+		<label className="checkbox mb-2 has-text-white">
+		  	<input className="mr-2" type="checkbox" 
+			  	type="checkbox"
+		        checked={customNetwork}
+		        onChange={customNetworkToggled} />
+		    		Use other factory (uses whatever network metamask is on)
+		</label>
+
+		<div className="field is-grouped is-grouped-multiline mb-0">
+			{!customNetwork && <>
+				<div className="control">
+					<div className="select is-success mr-2">
+						<select onChange={e => {userChangeNetwork(e.target.value)}} value={selected.network}>
+							<option value=''>Network</option>
+							{Object.keys(networks).map(networkName => <option key={networkName} value={networkName}>{networkName}</option>)}
+						</select>
+					</div>
 				</div>
-			</div>
+
+				<div className="control">
+					<div className="select is-info mr-2">
+						<select onChange={e => {userChangeAmm(e.target.value)}} value={selected.amm}>
+							<option value=''>Amm</option>
+							{selected.network && networks[selected.network].amms.map(ammItem => <option key={ammItem.name} value={ammItem.name}>{ammItem.name}</option>)}
+						</select>
+					</div>
+				</div>
+			</>}
 
 			{type === 'factory' &&
 				<div className="control">
