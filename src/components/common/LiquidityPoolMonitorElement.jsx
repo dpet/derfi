@@ -244,18 +244,41 @@ export default function LiquidityPoolMonitorElement({ setMessages }){
 	</div>
 
 	function tableJsx(){
-		let token_1_price, token_2_price
+		let token_1_price, token_2_price, token_1_percent, token_2_percent, token_1_percent_total, token_2_percent_total, token_1_price_format, token_2_price_format
 		if (results.prices && results.prices.length > 0){
 			token_1_price = results.prices[results.prices.length - 1].token_2_amount / results.prices[results.prices.length - 1].token_1_amount
 			token_2_price = results.prices[results.prices.length - 1].token_1_amount / results.prices[results.prices.length - 1].token_2_amount
-			token_1_price = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 5 }).format(token_1_price);
-			token_2_price = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 5 }).format(token_2_price);
+
+			token_1_price_format = token_1_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 16})
+			token_2_price_format = token_2_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 16})
+
+			if (results.prices.length > 1){
+				let token_1_price_old = results.prices[results.prices.length - 2].token_2_amount / results.prices[results.prices.length - 2].token_1_amount
+				let token_2_price_old = results.prices[results.prices.length - 2].token_1_amount / results.prices[results.prices.length - 2].token_2_amount
+				token_1_percent = getPercentChange(token_1_price_old, token_1_price)
+				token_2_percent = getPercentChange(token_2_price_old, token_2_price)
+
+				let token_1_price_start = results.prices[0].token_2_amount / results.prices[0].token_1_amount
+				let token_2_price_start = results.prices[0].token_1_amount / results.prices[0].token_2_amount
+				token_1_percent_total = getPercentChange(token_1_price_start, token_1_price)
+				token_2_percent_total = getPercentChange(token_2_price_start, token_2_price)
+			}
 		}
 
 		return <> 
 			{results.prices && results.prices.length > 0 && <div className="has-text-weight-normal mt-2">
-				<div><span className="light-green">{results.token_1_symbol} price:</span> {token_1_price} {results.token_2_symbol}</div>
-				<div><span className="light-green">{results.token_2_symbol} price:</span> {token_2_price} {results.token_1_symbol}</div>
+				<div>
+					<span className="light-green mr-2">{results.token_1_symbol} price:</span> 
+					{token_1_price_format} {results.token_2_symbol} 
+					{getPercentCellJsx(token_1_percent, undefined, 'span')}
+					{getPercentCellJsx(token_1_percent_total, undefined, 'span')}
+				</div>
+				<div>
+					<span className="light-green mr-2">{results.token_2_symbol} price:</span> 
+					{token_2_price_format} {results.token_1_symbol} 
+					{getPercentCellJsx(token_2_percent, undefined, 'span')}
+					{getPercentCellJsx(token_2_percent_total, undefined, 'span')}
+				</div>
 			</div>}
 			<table className="table is-bordered dark-table is-narrow mt-4">
 				<thead>
@@ -351,7 +374,7 @@ export default function LiquidityPoolMonitorElement({ setMessages }){
 		return <td>{str}</td>
 	}
 
-	function getPercentCellJsx(val, precision = 2){
+	function getPercentCellJsx(val, precision = 2, element = null){
 		if (typeof val === 'string' || isNaN(val))
 			return <td></td>
 
@@ -362,7 +385,10 @@ export default function LiquidityPoolMonitorElement({ setMessages }){
 		if (val != 0)
 			classColor = val < 0 ? 'red' : 'green'
 
-		return <td className={`percent ${classColor}`}>{parseFloat(val).toFixed(precision)}%</td>
+		if (element === 'span')
+			return <span className={`percent ${classColor} ml-4`}>{parseFloat(val).toFixed(precision)}%</span>
+		else
+			return <td className={`percent ${classColor}`}>{parseFloat(val).toFixed(precision)}%</td>
 	}
 
 	function getLpState(lpAddress){
